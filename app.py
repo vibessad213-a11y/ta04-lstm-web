@@ -16,7 +16,7 @@ model = None
 scaler = None
 
 if os.path.exists(MODEL_PATH) and os.path.exists(SCALER_PATH):
-    model = tf.keras.models.load_model(MODEL_PATH)
+    model = keras.models.load_model(MODEL_PATH)
     scaler = joblib.load(SCALER_PATH)
 
 
@@ -62,7 +62,7 @@ def predict():
         # Reshape ke format 3D (1, 12, 1) untuk LSTM
         X_input = scaled_input.reshape(1, 12, 1)
 
-        # Inperensi Model
+        # Inferensi Model
         pred_scaled = model.predict(X_input)
         prediction = scaler.inverse_transform(pred_scaled)[0][0]
 
@@ -77,5 +77,3 @@ def predict():
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
-
-    app = app
